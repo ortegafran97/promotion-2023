@@ -4,14 +4,16 @@ import com.promotion.categoryservice.entity.Category;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CategoryService {
 
-List<Category> findAll();
-Category findById(UUID idCategory);
-Category saveOne(Category category);
+    List<Category> findAll();
 
+    Optional findById(UUID idCategory);
+
+    Category saveOne(Category category);
 
 
 }

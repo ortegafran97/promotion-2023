@@ -15,10 +15,10 @@ import java.util.UUID;
 public class Category {
 
     @Id
-    @Column(name="id_category", columnDefinition = "uuid")
+    @Column(name = "id_category", columnDefinition = "uuid")
     @GeneratedValue
     @GenericGenerator(
-            name="uuid",
+            name = "uuid",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID id;

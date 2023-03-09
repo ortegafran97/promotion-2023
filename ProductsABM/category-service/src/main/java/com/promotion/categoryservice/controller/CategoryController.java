@@ -21,5 +21,4 @@ public interface CategoryController {
     ResponseEntity<Category> saveOne(@RequestBody Category category);
 
 
-
 }
