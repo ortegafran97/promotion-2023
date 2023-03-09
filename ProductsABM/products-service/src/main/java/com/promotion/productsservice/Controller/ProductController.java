@@ -32,12 +32,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.saveOne(product));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Boolean> deleteOne(@PathVariable("id")UUID idProduct){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteOne(@PathVariable("id") UUID idProduct){
         return ResponseEntity.ok(productService.deleteOne(idProduct));
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Optional<Product>> updateOne(@PathVariable("id") UUID id, @RequestBody Product product){
         product.setId(id);
 
