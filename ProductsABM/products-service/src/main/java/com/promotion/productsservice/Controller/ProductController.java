@@ -1,5 +1,8 @@
 package com.promotion.productsservice.Controller;
 
+import com.promotion.productsservice.Exceptions.Classes.AlreadyExistsException;
+import com.promotion.productsservice.Exceptions.Classes.CouldntCompleteException;
+import com.promotion.productsservice.Exceptions.Classes.NotFoundException;
 import com.promotion.productsservice.Model.Product;
 import com.promotion.productsservice.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +27,39 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Product>> findById(@PathVariable("id") UUID idProduct){
-        return ResponseEntity.ok(productService.findById(idProduct));
+        Optional<Product> product = productService.findById(idProduct);
+
+        if(product.isEmpty())
+            throw new NotFoundException("Producto no encontrado.");
+
+        return ResponseEntity.ok(product);
     }
 
     @PostMapping
     public ResponseEntity<Product> saveOne(@RequestBody Product product){
+        if(product.getId() != null && productService.findById(product.getId()).isPresent())
+            throw new AlreadyExistsException("El producto ya existe.");
+
         return ResponseEntity.ok(productService.saveOne(product));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteOne(@PathVariable("id") UUID idProduct){
-        return ResponseEntity.ok(productService.deleteOne(idProduct));
+        if(!productService.deleteOne(idProduct))
+            throw new CouldntCompleteException("No se elimino el producto.");
+
+        return ResponseEntity.ok(true);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Optional<Product>> updateOne(@PathVariable("id") UUID id, @RequestBody Product product){
         product.setId(id);
+        Optional<Product> updated = productService.updateOne(product);
 
-        return ResponseEntity.ok(productService.updateOne(product));
+        if(updated.isEmpty())
+            throw new CouldntCompleteException("No se actualizo el producto.");
+
+
+        return ResponseEntity.ok(updated);
     }
 }
