@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -15,10 +16,11 @@ public interface CategoryController {
     ResponseEntity<List<Category>> findAll();
 
     @GetMapping("/{id}")
-    ResponseEntity<Category> findById(@PathVariable("id") UUID idCategory);
+    ResponseEntity<Optional<Category>> findById(@PathVariable("id") UUID idCategory);
 
     @PostMapping()
     ResponseEntity<Category> saveOne(@RequestBody Category category);
+
 
 
 }
