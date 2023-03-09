@@ -22,6 +22,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Product>> findById(@PathVariable("id") UUID idProduct){
+        return ResponseEntity.ok(productService.findById(idProduct));
+    }
+
     @PostMapping
     public ResponseEntity<Product> saveOne(@RequestBody Product product){
         return ResponseEntity.ok(productService.saveOne(product));
