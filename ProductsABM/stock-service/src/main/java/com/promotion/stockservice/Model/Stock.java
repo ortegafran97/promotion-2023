@@ -24,7 +24,7 @@ public class Stock {
             name = "uuid",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    UUID id;
-    Integer quantity;
-    UUID idProduct;
+    private UUID id;
+    private Integer quantity;
+    private UUID idProduct;
 }

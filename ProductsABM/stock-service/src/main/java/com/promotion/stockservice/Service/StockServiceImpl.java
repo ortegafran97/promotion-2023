@@ -4,11 +4,13 @@ import com.promotion.stockservice.Model.Stock;
 import com.promotion.stockservice.Repository.StockRepository;
 import com.promotion.stockservice.Service.Interface.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class StockServiceImpl implements StockService {
 
     @Autowired
@@ -45,7 +47,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Optional<Stock> saveOne(Stock stock) {
-        if(stockRepository.findById(stock.getId()).isPresent())
+        if(stock.getId() != null && stockRepository.findById(stock.getId()).isPresent())
             return null;
 
         return Optional.of(stockRepository.save(stock));
