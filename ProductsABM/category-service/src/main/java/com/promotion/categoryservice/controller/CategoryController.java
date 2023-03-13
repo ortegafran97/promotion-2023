@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/category")
+
 public interface CategoryController {
 
     @GetMapping()
@@ -21,6 +20,11 @@ public interface CategoryController {
     @PostMapping()
     ResponseEntity<Category> saveOne(@RequestBody Category category);
 
+    @PutMapping("/{id}")
+    ResponseEntity<Optional<Category>> updateOne(@PathVariable("id") UUID id, @RequestBody Category category);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Boolean> deleteOne(@PathVariable("id") UUID idCategory);
 
 
 }

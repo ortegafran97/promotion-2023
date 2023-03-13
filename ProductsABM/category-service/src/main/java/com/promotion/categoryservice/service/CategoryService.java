@@ -15,5 +15,9 @@ public interface CategoryService {
 
     Category saveOne(Category category);
 
+    Optional<Category> updateOne(Category category);
+
+    Boolean deleteOne(UUID idCategory);
+
 
 }
