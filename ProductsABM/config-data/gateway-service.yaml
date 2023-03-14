@@ -29,7 +29,3 @@ spring:
           uri: lb://category-service/
           predicates:
             - Path=/category/**
-
-    discovery:
-      locator:
-        enable: true
