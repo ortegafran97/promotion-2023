@@ -1,1 +1,14 @@
-
+server:
+  port: 8081
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        bootstrap: true
+        git:
+          default-label: master
+          uri: https://github.com/ortegafran97/promotion-2023
+          search-paths: config-data
+#          clone-on-start: true
