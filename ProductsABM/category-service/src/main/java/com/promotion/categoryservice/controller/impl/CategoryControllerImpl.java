@@ -2,6 +2,8 @@ package com.promotion.categoryservice.controller.impl;
 
 import com.promotion.categoryservice.controller.CategoryController;
 import com.promotion.categoryservice.entity.Category;
+import com.promotion.categoryservice.exceptions.clases.AlreadyExistsException;
+import com.promotion.categoryservice.exceptions.clases.NotFoundException;
 import com.promotion.categoryservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +29,17 @@ public class CategoryControllerImpl implements CategoryController {
 
     @Override
     public ResponseEntity<Optional<Category>> findById(UUID idCategory) {
-        return ResponseEntity.ok(categoryService.findById(idCategory));
+        Optional<Category> category = categoryService.findById(idCategory);
+        if(category.isEmpty())
+            throw new NotFoundException("La categoria no se encontro");
+        return ResponseEntity.ok(category);
     }
 
     @Override
     public ResponseEntity<Category> saveOne(Category category) {
-        return ResponseEntity.ok(categoryService.saveOne(category));
+        if(category.getId() != null && categoryService.findById(category.getId()).isPresent())
+        throw new AlreadyExistsException("La categoría ya fue creada anteriormente");
+            return ResponseEntity.ok(categoryService.saveOne(category));
     }
 
     @Override
