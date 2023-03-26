@@ -68,4 +68,14 @@ public class StockControllerImpl implements IStockController {
 
         return ResponseEntity.ok(stockService.deleteById(idStock));
     }
+
+    @Override
+    public ResponseEntity<List<Stock>> findByProductId(UUID idProduct) {
+        List<Stock> stocks = stockService.findByProductId(idProduct);
+
+        if(stocks.isEmpty())
+            throw new NotFoundException("No existen stocks para el productos indicado");
+
+        return ResponseEntity.ok(stocks);
+    }
 }
