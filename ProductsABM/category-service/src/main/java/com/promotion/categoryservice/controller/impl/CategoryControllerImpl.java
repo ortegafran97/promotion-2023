@@ -38,8 +38,8 @@ public class CategoryControllerImpl implements CategoryController {
     @Override
     public ResponseEntity<Category> saveOne(Category category) {
         if(category.getId() != null && categoryService.findById(category.getId()).isPresent())
-        throw new AlreadyExistsException("La categoría ya fue creada anteriormente");
-            return ResponseEntity.ok(categoryService.saveOne(category));
+            throw new AlreadyExistsException("La categoría ya fue creada anteriormente");
+        return ResponseEntity.ok(categoryService.saveOne(category));
     }
 
     @Override
