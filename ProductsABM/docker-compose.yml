@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  config:
+    image: config-service
+    build:
+      context: config-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+
+  eureka:
+    image: discovery-service
+    build:
+      context: discovery-service
+      dockerfile: Dockerfile
+    environment:
+#      - spring.cloud.config.uri= ${CLOUD_CONFIG_URI}
+      - spring.cloud.config.uri=http://config:8081
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config
+
+  gateway:
+    image: gateway-service
+    build:
+      context: gateway-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.serviceUrl.default-zone=http://eureka:8761/eureka
+#      - spring.cloud.config.uri= ${CLOUD_CONFIG_URI}
+      - spring.cloud.config.uri=http://localhost:8081/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config
+      - eureka
+
+  products:
+    image: products-service
+    build:
+      context: products-service
+      dockerfile: Dockerfile
+    depends_on:
+      - config
+      - eureka
+      - gateway
+    environment:
+      - eureka.client.serviceUrl.default-zone=http://eureka:8761/eureka
+      #      - spring.cloud.config.uri= ${CLOUD_CONFIG_URI}
+      - spring.cloud.config.uri=http://localhost:8081/
+      - server.port=8083
+  #      - spring.cloud.config.uri= http://config:8081/
+    ports:
+      - "8083:8083"
+
+  stock:
+    image: stock-service
+    build:
+      context: stock-service
+      dockerfile: Dockerfile
+    depends_on:
+      - config
+      - eureka
+      - gateway
+    environment:
+      - eureka.client.serviceUrl.default-zone=${EUREKA_DEF_ZONE}
+      - spring.cloud.config.uri= ${CLOUD_CONFIG_URI}
+      - server.port=8084
+  #      - spring.cloud.config.uri= http://config:8081/
+    ports:
+      - "8084:8084"
+
+  category:
+    image: category-service
+    build:
+      context: category-service
+      dockerfile: Dockerfile
+    depends_on:
+      - config
+      - eureka
+      - gateway
+    environment:
+      - eureka.client.serviceUrl.default-zone=${EUREKA_DEF_ZONE}
+      - spring.cloud.config.uri=${CLOUD_CONFIG_URI}
+      - server.port=8085
+#      - spring.cloud.config.uri= http://config:8081/
+    ports:
+      - "8085:8085"
+
