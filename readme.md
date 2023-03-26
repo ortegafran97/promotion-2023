@@ -8,4 +8,4 @@
 
 ## Proyectos Comprendidos
 
-1. ABM en microservicios: Productos, Stock y Categoria
+1. ProductosABM: Proyecto de gestion de productos, stock y categoria desarrollado bajo la metodologia de Microservicios en Java Spring.
