@@ -1,5 +1,6 @@
 package com.promotion.productsservice.Service;
 
+import com.promotion.productsservice.Model.Category;
 import com.promotion.productsservice.Model.Product;
 
 import java.util.List;
@@ -12,4 +13,14 @@ public interface ProductService {
     Product saveOne(Product product);
     Optional<Product> updateOne(Product product);
     Boolean deleteOne(UUID idProduct);
+
+
+    /* Products */
+    List<Category> findAllCategories();
+    Optional<Category> findCategoryById(UUID idCategory);
+    Category saveOne(Category category);
+    Optional<Category> updateOne(UUID idCategory,Category category);
+    Boolean deleteOneCategory(UUID idCategory);
+
+    /* Stock */
 }

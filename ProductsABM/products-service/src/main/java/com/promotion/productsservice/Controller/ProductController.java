@@ -3,7 +3,9 @@ package com.promotion.productsservice.Controller;
 import com.promotion.productsservice.Exceptions.Classes.AlreadyExistsException;
 import com.promotion.productsservice.Exceptions.Classes.CouldntCompleteException;
 import com.promotion.productsservice.Exceptions.Classes.NotFoundException;
+import com.promotion.productsservice.Model.Category;
 import com.promotion.productsservice.Model.Product;
+import com.promotion.productsservice.Model.Stock;
 import com.promotion.productsservice.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,4 +64,27 @@ public class ProductController {
 
         return ResponseEntity.ok(updated);
     }
+
+    /* Microservices communication */
+
+    /* Category */
+ /*   public ResponseEntity<Category>  getCategoryById(@PathVariable("idCategory")UUID idCategory){
+        Category category =
+
+    }*/
+
+    @GetMapping("/category")
+    public ResponseEntity<List<Category>> findAllCategories(){
+        return ResponseEntity.ok(productService.findAllCategories());
+    }
+/*  TODO: findCategory()
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<Optional<Category>> findCategory()
+
+
+
+*/
+
+
 }

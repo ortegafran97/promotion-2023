@@ -25,4 +25,9 @@ public interface IStockController {
     @DeleteMapping("/{id}")
     ResponseEntity<Boolean> deleteOne(@PathVariable("id")UUID idStock);
 
+
+    /* Products methods*/
+    @GetMapping("/product/{id}")
+    ResponseEntity<List<Stock>> findByProductId(@PathVariable("id") UUID idProduct);
+
 }
