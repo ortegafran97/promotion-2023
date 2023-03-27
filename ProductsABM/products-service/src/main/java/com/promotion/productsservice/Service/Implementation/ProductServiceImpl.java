@@ -71,6 +71,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Optional<Category> findProductCategory(UUID idProduct){
+        Optional<Product> product = productRepository.findById(idProduct);
+
+        if(product.isEmpty())
+            return Optional.empty();
+
+        Optional<Category> category  = findCategoryById(product.get().getCategory_id());
+
+        return category;
+    }
+
+    @Override
     public Optional<Stock> findProductStock(UUID idProduct) {
         Optional<Stock> stock = stockFeignClient.findStockByProductId(idProduct);
 

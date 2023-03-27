@@ -19,6 +19,7 @@ public interface ProductService {
     /* Products */
     List<Category> findAllCategories();
     Optional<Category> findCategoryById(UUID idCategory);
+    Optional<Category> findProductCategory(UUID idProduct);
 
 
     /* Stock */
