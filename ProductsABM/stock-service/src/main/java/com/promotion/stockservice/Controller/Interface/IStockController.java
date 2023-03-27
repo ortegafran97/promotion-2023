@@ -31,4 +31,7 @@ public interface IStockController {
     @GetMapping("/product/{id}")
     ResponseEntity<Map<String, String>> findByProductId(@PathVariable("id") UUID idProduct);
 
+    @PostMapping("/product/{id}/decrease")
+    ResponseEntity<Map<String, String>> decreaseStock(@PathVariable("id") UUID idProduct, @RequestBody Stock stock);
+
 }

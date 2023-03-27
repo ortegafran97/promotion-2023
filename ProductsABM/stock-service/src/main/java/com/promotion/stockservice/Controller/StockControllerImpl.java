@@ -80,4 +80,15 @@ public class StockControllerImpl implements IStockController {
 
         return ResponseEntity.ok(response);
     }
+
+    @Override
+    public ResponseEntity<Map<String, String>> decreaseStock(UUID idProduct, Stock stock) {
+        Stock newStock = stockService.decreaseStock(idProduct, stock.getQuantity());
+
+        Map<String,String> response = new HashMap<>();
+        response.put("product",idProduct.toString());
+        response.put("quantity",newStock.getQuantity().toString());
+
+        return ResponseEntity.ok(response);
+    }
 }
