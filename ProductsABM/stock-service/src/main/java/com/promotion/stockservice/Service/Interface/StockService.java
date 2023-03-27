@@ -13,4 +13,6 @@ public interface StockService {
     Boolean deleteById(UUID idStock);
     Optional<Stock> updateOne(Stock stock);
     Optional<Stock> saveOne(Stock stock);
+
+    Stock decreaseStock(UUID idProduct, Integer quantity);
 }

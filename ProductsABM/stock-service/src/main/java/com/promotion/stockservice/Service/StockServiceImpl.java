@@ -67,4 +67,23 @@ public class StockServiceImpl implements StockService {
 
         return Optional.of(stockRepository.save(stock));
     }
+
+    @Override
+    public Stock decreaseStock(UUID idProduct, Integer quantity) {
+        Stock stock = findByProductId(idProduct);
+
+        if (stock == null)
+            return null;
+
+        stockRepository.findByProduct(idProduct)
+                .stream()
+                .map(s -> s.getId())
+                .forEach(id -> stockRepository.deleteById(id));
+
+        if(quantity>stock.getQuantity())
+            stock.setQuantity(0);
+        else stock.setQuantity(stock.getQuantity()-quantity);
+
+        return stockRepository.save(stock);
+    }
 }
