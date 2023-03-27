@@ -24,5 +24,7 @@ public interface ProductService {
 
     /* Stock */
     Optional<Stock> findProductStock(UUID idProduct);
+    Optional<Stock> decreaseStock(UUID idProduct, Integer quantity);
+    Optional<Stock> saveStock(Stock stock);
 
 }

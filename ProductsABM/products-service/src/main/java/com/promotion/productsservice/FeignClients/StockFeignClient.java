@@ -28,4 +28,7 @@ public interface StockFeignClient {
 
     @GetMapping("/product/{idProduct}")
     Optional<Stock> findStockByProductId(@PathVariable("idProduct") UUID idProduct);
+
+    @PostMapping("/product/{id}/decrease")
+    Optional<Stock> decreaseStock(@PathVariable("id") UUID idProduct,@RequestBody Stock stock);
 }

@@ -92,5 +92,19 @@ public class ProductServiceImpl implements ProductService {
         return stock;
     }
 
+    @Override
+    public Optional<Stock> saveStock(Stock stock) {
+        Optional<Stock> newStock = stockFeignClient.saveOne(stock);
+        return newStock;
+    }
+
+    @Override
+    public Optional<Stock> decreaseStock(UUID idProduct, Integer quantity) {
+        Stock decreaser = new Stock();
+        decreaser.setQuantity(quantity);
+        decreaser.setId(idProduct);
+
+        return stockFeignClient.decreaseStock(idProduct, decreaser);
+    }
 
 }

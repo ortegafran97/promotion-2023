@@ -89,5 +89,28 @@ public class ProductController {
     public ResponseEntity<Optional<Stock>> getStockForProduct(@PathVariable("idProduct") UUID idProduct){
         return ResponseEntity.ok(productService.findProductStock(idProduct));
     }
+    @PostMapping("/{idProduct}/stock/save")
+    public ResponseEntity<Optional<Stock>> saveStock(@PathVariable("idProduct") UUID id,@RequestBody Stock stock){
+        stock.setId(id);
+        Optional<Stock> newStock = productService.saveStock(stock);
+
+        if(newStock.isEmpty())
+            throw new CouldntCompleteException(String.format("Error al guardar stock para producto id={}",id));
+
+        return ResponseEntity.ok(newStock);
+    }
+    @PostMapping("/{idProduct}/stock/decrease")
+    public ResponseEntity<Optional<Stock>> decreaseStock(@PathVariable("idProduct") UUID id, @RequestBody Stock stock){
+        Optional<Stock> decreasedStock = productService.decreaseStock(id, stock.getQuantity());
+
+        if(decreasedStock.isEmpty())
+            throw new CouldntCompleteException(String.format("Error al quitar stock para producto id=" + id));
+
+        return ResponseEntity.ok(decreasedStock);
+    }
+
+
+
+
 
 }
