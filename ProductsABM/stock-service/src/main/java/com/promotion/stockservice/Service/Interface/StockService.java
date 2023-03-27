@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface StockService {
     List<Stock> findAll();
     Optional<Stock> findById(UUID idStock);
-    List<Stock> findByProductId(UUID idProduct);
+    Stock findByProductId(UUID idProduct);
     Boolean deleteById(UUID idStock);
     Optional<Stock> updateOne(Stock stock);
     Optional<Stock> saveOne(Stock stock);

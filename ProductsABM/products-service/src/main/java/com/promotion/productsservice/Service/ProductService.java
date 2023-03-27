@@ -18,9 +18,7 @@ public interface ProductService {
     /* Products */
     List<Category> findAllCategories();
     Optional<Category> findCategoryById(UUID idCategory);
-    Category saveOne(Category category);
-    Optional<Category> updateOne(UUID idCategory,Category category);
-    Boolean deleteOneCategory(UUID idCategory);
+
 
     /* Stock */
 }

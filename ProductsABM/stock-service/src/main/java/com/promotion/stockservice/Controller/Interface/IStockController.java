@@ -28,6 +28,6 @@ public interface IStockController {
 
     /* Products methods*/
     @GetMapping("/product/{id}")
-    ResponseEntity<List<Stock>> findByProductId(@PathVariable("id") UUID idProduct);
+    ResponseEntity<Stock> findByProductId(@PathVariable("id") UUID idProduct);
 
 }

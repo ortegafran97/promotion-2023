@@ -27,8 +27,25 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<Stock> findByProductId(UUID idProduct) {
-        return stockRepository.findByIdProduct(idProduct);
+    public Stock findByProductId(UUID idProduct) {
+        List<Stock> stocks = stockRepository.findByProduct(idProduct);
+
+        Stock response = new Stock();
+        response.setProduct(idProduct);
+
+        if(stocks.isEmpty()){
+            response.setQuantity(0);
+            return response;
+        }
+
+        int quantity = stocks
+                .stream()
+                .map(s -> s.getQuantity())
+                .reduce(0,(subtotal,element)-> subtotal+element);
+
+        response.setQuantity(quantity);
+
+        return response;
     }
 
     @Override

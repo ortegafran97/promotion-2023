@@ -68,23 +68,18 @@ public class ProductController {
     /* Microservices communication */
 
     /* Category */
- /*   public ResponseEntity<Category>  getCategoryById(@PathVariable("idCategory")UUID idCategory){
-        Category category =
+    @GetMapping("/category/{idCategory}")
+    public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable("idCategory")UUID idCategory){
+        Optional<Category> category = productService.findCategoryById(idCategory);
 
-    }*/
+        if(category.isEmpty())
+            throw new NotFoundException("Categoria no encontrada.");
+
+        return ResponseEntity.ok(category);
+    }
 
     @GetMapping("/category")
     public ResponseEntity<List<Category>> findAllCategories(){
         return ResponseEntity.ok(productService.findAllCategories());
     }
-/*  TODO: findCategory()
-
-    @GetMapping("/category/{id}")
-    public ResponseEntity<Optional<Category>> findCategory()
-
-
-
-*/
-
-
 }

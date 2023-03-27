@@ -70,12 +70,12 @@ public class StockControllerImpl implements IStockController {
     }
 
     @Override
-    public ResponseEntity<List<Stock>> findByProductId(UUID idProduct) {
-        List<Stock> stocks = stockService.findByProductId(idProduct);
+    public ResponseEntity<Stock> findByProductId(UUID idProduct) {
+        Stock stock = stockService.findByProductId(idProduct);
 
-        if(stocks.isEmpty())
-            throw new NotFoundException("No existen stocks para el productos indicado");
+        //if(stocks.isEmpty())
+          //  throw new NotFoundException("No existen stocks para el productos indicado");
 
-        return ResponseEntity.ok(stocks);
+        return ResponseEntity.ok(stock);
     }
 }

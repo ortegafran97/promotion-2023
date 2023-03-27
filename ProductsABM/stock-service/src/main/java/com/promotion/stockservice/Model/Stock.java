@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -26,5 +27,8 @@ public class Stock {
     )
     private UUID id;
     private Integer quantity;
-    private UUID idProduct;
+    @Column(name="id_product", columnDefinition = "uuid")
+    private UUID product;
+
+    private LocalDateTime date = LocalDateTime.now();
 }

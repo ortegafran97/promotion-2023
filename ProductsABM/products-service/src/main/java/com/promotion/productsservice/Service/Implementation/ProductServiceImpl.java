@@ -68,21 +68,5 @@ public class ProductServiceImpl implements ProductService {
         return category;
     }
 
-    @Override
-    public Category saveOne(Category category) {
-        Category newCategory = categoryFeignClient.saveOne(category);
-
-        return newCategory;
-    }
-
-    @Override
-    public Optional<Category> updateOne(UUID idCategory, Category category) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Boolean deleteOneCategory(UUID idCategory) {
-        return null;
-    }
 
 }
