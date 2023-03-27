@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/stock")
@@ -70,12 +68,16 @@ public class StockControllerImpl implements IStockController {
     }
 
     @Override
-    public ResponseEntity<Stock> findByProductId(UUID idProduct) {
+    public ResponseEntity<Map<String, String>> findByProductId(UUID idProduct) {
+        Map<String,String> response = new HashMap<>();
         Stock stock = stockService.findByProductId(idProduct);
 
-        //if(stocks.isEmpty())
-          //  throw new NotFoundException("No existen stocks para el productos indicado");
+        if(stock == null)
+            throw new NotFoundException("No existen stocks para el productos indicado");
 
-        return ResponseEntity.ok(stock);
+        response.put("product",idProduct.toString());
+        response.put("quantity",stock.getQuantity().toString());
+
+        return ResponseEntity.ok(response);
     }
 }

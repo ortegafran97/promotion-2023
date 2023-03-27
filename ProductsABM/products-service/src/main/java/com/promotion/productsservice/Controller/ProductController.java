@@ -68,7 +68,7 @@ public class ProductController {
     /* Microservices communication */
 
     /* Category */
-    @GetMapping("/category/{idCategory}")
+    @GetMapping("/{idCategory}/category")
     public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable("idCategory")UUID idCategory){
         Optional<Category> category = productService.findCategoryById(idCategory);
 
@@ -82,4 +82,12 @@ public class ProductController {
     public ResponseEntity<List<Category>> findAllCategories(){
         return ResponseEntity.ok(productService.findAllCategories());
     }
+
+
+    /* Stock */
+    @GetMapping("/{id}/stock")
+    public ResponseEntity<Optional<Stock>> getStockForProduct(@PathVariable("id") UUID idProduct){
+        return ResponseEntity.ok(productService.findProductStock(idProduct));
+    }
+
 }

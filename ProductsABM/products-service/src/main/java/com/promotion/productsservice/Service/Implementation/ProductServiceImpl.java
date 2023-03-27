@@ -1,9 +1,11 @@
 package com.promotion.productsservice.Service.Implementation;
 
+import com.promotion.productsservice.Exceptions.Classes.NotFoundException;
 import com.promotion.productsservice.FeignClients.CategoryFeignClient;
 import com.promotion.productsservice.FeignClients.StockFeignClient;
 import com.promotion.productsservice.Model.Category;
 import com.promotion.productsservice.Model.Product;
+import com.promotion.productsservice.Model.Stock;
 import com.promotion.productsservice.Repository.ProductRepository;
 import com.promotion.productsservice.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,16 @@ public class ProductServiceImpl implements ProductService {
     public Optional<Category> findCategoryById(UUID idCategory) {
         Optional<Category> category = categoryFeignClient.findById(idCategory);
         return category;
+    }
+
+    @Override
+    public Optional<Stock> findProductStock(UUID idProduct) {
+        Optional<Stock> stock = stockFeignClient.findStockByProductId(idProduct);
+
+        if(stock.isEmpty())
+            throw new NotFoundException("No hay stock del producto.");
+
+        return stock;
     }
 
 

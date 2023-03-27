@@ -13,5 +13,5 @@ public class Stock {
 
     private UUID id;
     private Integer quantity;
-    private UUID idProduct;
+    private UUID product;
 }

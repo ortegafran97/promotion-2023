@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +29,6 @@ public interface IStockController {
 
     /* Products methods*/
     @GetMapping("/product/{id}")
-    ResponseEntity<Stock> findByProductId(@PathVariable("id") UUID idProduct);
+    ResponseEntity<Map<String, String>> findByProductId(@PathVariable("id") UUID idProduct);
 
 }

@@ -2,6 +2,7 @@ package com.promotion.productsservice.Service;
 
 import com.promotion.productsservice.Model.Category;
 import com.promotion.productsservice.Model.Product;
+import com.promotion.productsservice.Model.Stock;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +22,6 @@ public interface ProductService {
 
 
     /* Stock */
+    Optional<Stock> findProductStock(UUID idProduct);
+
 }

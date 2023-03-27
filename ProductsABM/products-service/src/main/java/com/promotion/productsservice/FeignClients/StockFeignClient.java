@@ -27,5 +27,5 @@ public interface StockFeignClient {
     Boolean deleteOne(@PathVariable("id") UUID idStock);
 
     @GetMapping("/product/{idProduct}")
-    List<Stock> findStockByProductId(@PathVariable("idProduct") UUID idProduct);
+    Optional<Stock> findStockByProductId(@PathVariable("idProduct") UUID idProduct);
 }

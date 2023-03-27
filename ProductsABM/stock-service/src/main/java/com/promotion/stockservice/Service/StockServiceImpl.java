@@ -30,18 +30,16 @@ public class StockServiceImpl implements StockService {
     public Stock findByProductId(UUID idProduct) {
         List<Stock> stocks = stockRepository.findByProduct(idProduct);
 
+        if(stocks.stream().count() == 0)
+            return null;
+
         Stock response = new Stock();
         response.setProduct(idProduct);
 
-        if(stocks.isEmpty()){
-            response.setQuantity(0);
-            return response;
-        }
-
         int quantity = stocks
                 .stream()
-                .map(s -> s.getQuantity())
-                .reduce(0,(subtotal,element)-> subtotal+element);
+                .map(Stock::getQuantity)
+                .reduce(0, Integer::sum);
 
         response.setQuantity(quantity);
 
@@ -65,7 +63,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public Optional<Stock> saveOne(Stock stock) {
         if(stock.getId() != null && stockRepository.findById(stock.getId()).isPresent())
-            return null;
+            return Optional.empty();
 
         return Optional.of(stockRepository.save(stock));
     }
