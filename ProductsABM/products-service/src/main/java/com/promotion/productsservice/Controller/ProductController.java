@@ -7,6 +7,8 @@ import com.promotion.productsservice.Model.Category;
 import com.promotion.productsservice.Model.Product;
 import com.promotion.productsservice.Model.Stock;
 import com.promotion.productsservice.Service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,14 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/product")
+@Api(value = "productos", description = "Operaciones relacionadas con productos")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
     @GetMapping
+    @ApiOperation(value = "Obtener todos los productos", response = Product.class, responseContainer = "List")
     public ResponseEntity<List<Product>> findAll(){
         return ResponseEntity.ok(productService.findAll());
     }

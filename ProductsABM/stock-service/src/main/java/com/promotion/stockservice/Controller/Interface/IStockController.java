@@ -1,6 +1,8 @@
 package com.promotion.stockservice.Controller.Interface;
 
 import com.promotion.stockservice.Model.Stock;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +11,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-
+@Api(value = "stock", description = "Operaciones relacionadas con stock")
 public interface IStockController {
+
+    @ApiOperation(value = "Obtener el stock de los productos", response = Stock.class, responseContainer = "List")
     @GetMapping
     ResponseEntity<List<Stock>> findAll();
 
